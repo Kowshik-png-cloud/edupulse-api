@@ -1,0 +1,14 @@
+services:
+  - type: web
+    name: edupulse-api
+    runtime: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn app:app --bind 0.0.0.0:$PORT
+    healthCheckPath: /api/health
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.12.8
+      - key: FRONTEND_ORIGINS
+        value: https://fancy-pudding-438b4a.netlify.app,https://b4a.netlify.app
+      - key: GEMINI_API_KEY
+        sync: false
